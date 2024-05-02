@@ -3,6 +3,7 @@ import { Card } from "@repo/ui/card";
 import { Code } from "@repo/ui/code";
 import styles from "./page.module.css";
 import { Button } from "@repo/ui/button";
+import { getTodos } from "../lib/todos";
 
 function Gradient({
   conic,
@@ -51,7 +52,9 @@ const LINKS = [
   },
 ];
 
-export default function Page(): JSX.Element {
+export default async function Page(): Promise<JSX.Element> {
+  const { todos = [] } = await getTodos();
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
@@ -137,6 +140,14 @@ export default function Page(): JSX.Element {
           <Card className={styles.card} href={href} key={title} title={title}>
             {description}
           </Card>
+        ))}
+      </div>
+
+      <div>
+        {todos.map((todo: any) => (
+          <div key={todo.id}>
+            <p>{todo.title}</p>
+          </div>
         ))}
       </div>
     </main>
