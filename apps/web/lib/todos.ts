@@ -9,16 +9,16 @@ export async function getTodos() {
   }
 }
 
-export async function createTodo(title: any) {
+export async function createTodo(title: string, userId: string) {
   try {
-    const todo = await prisma.todo.create({ data: { title } });
+    const todo = await prisma.todo.create({ data: { title, userId } });
     return { todo };
   } catch (error) {
     return { error };
   }
 }
 
-export async function getTodoById(id: any) {
+export async function getTodoById(id: string) {
   try {
     const todo = await prisma.todo.findUnique({ where: { id } });
     return { todo };
@@ -27,7 +27,7 @@ export async function getTodoById(id: any) {
   }
 }
 
-export async function updateTodo(id: any, isCompleted: any) {
+export async function updateTodo(id: string, isCompleted: boolean) {
   try {
     const todo = await prisma.todo.update({
       where: { id },
