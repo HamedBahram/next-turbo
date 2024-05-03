@@ -1,4 +1,4 @@
-import { prisma } from "database";
+import { prisma } from "./client";
 
 export async function getTodos() {
   try {
